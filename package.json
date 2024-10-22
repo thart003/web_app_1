@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.5",
     "@prisma/client": "^5.21.1",
     "aws-sdk": "^2.1691.0",
+    "daisyui": "^4.12.13",
     "mailgun.js": "^10.2.3",
     "mongoose": "^8.7.2",
     "next": "15.0.0",
