@@ -1,4 +1,3 @@
-// app/lib/db.ts
 import mongoose from 'mongoose';
 
 declare global {
@@ -31,8 +30,16 @@ async function dbConnect() {
   }
 
   if (!cached.promise) {
-    const opts = {
+    const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
+      serverApi: {
+        version: "1" as const,
+        strict: true,
+        deprecationErrors: true,
+      },
+      maxPoolSize: 10,
+      socketTimeoutMS: 45000,
+      family: 4
     }
 
     cached.promise = mongoose.connect(MONGODB_URI, opts)
@@ -40,6 +47,7 @@ async function dbConnect() {
 
   try {
     cached.conn = await cached.promise
+    console.log('Connected to MongoDB successfully!')
   } catch (e) {
     cached.promise = null
     throw e
@@ -49,4 +57,3 @@ async function dbConnect() {
 }
 
 export default dbConnect
-
