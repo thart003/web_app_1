@@ -1,110 +1,76 @@
-// app/auth/login/page.tsx
-'use client';  // Mark as Client Component
+// app/page.tsx
+'use client';
 
-import { useState, FormEvent } from 'react';
-import { Button } from '../../components/ui/button';
+import { Button } from '@/app/components/ui/button';
+import { ArrowRight, Edit, Globe, Zap } from 'lucide-react';
 
-export default function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false
-  });
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log('Form submitted:', formData);
-  };
-
+export default function LandingPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="text-gray-600 mt-2">Sign in to your account</p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <header className="w-full p-4 flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold">W</span>
+          </div>
+          <span className="text-xl font-bold">WriteFlow</span>
         </div>
         
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={formData.password}
-                onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                checked={formData.rememberMe}
-                onChange={(e) => setFormData(prev => ({ ...prev, rememberMe: e.target.checked }))}
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <button
-                type="button"
-                onClick={() => console.log('Forgot password clicked')}
-                className="font-medium text-indigo-600 hover:text-indigo-500 bg-transparent border-none p-0"
-              >
-                Forgot your password?
-              </button>
-            </div>
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Sign in
+        <nav className="space-x-4">
+          <Button variant="ghost">Features</Button>
+          <Button variant="ghost">Pricing</Button>
+          <Button variant="outline">Sign in</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            Get Started
           </Button>
+        </nav>
+      </header>
 
-          <div className="text-center text-sm">
-            <span className="text-gray-600">Don't have an account? </span>
-            <button
-              type="button"
-              onClick={() => console.log('Sign up clicked')}
-              className="font-medium text-indigo-600 hover:text-indigo-500 bg-transparent border-none p-0"
-            >
-              Sign up
-            </button>
+      <main className="max-w-4xl mx-auto px-4 pt-20 text-center">
+        <h1 className="text-5xl font-bold tracking-tight mb-6">
+          Write once,
+          <br />
+          publish everywhere
+        </h1>
+        
+        <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+          Create beautiful articles in a familiar document editor and publish directly to your website. No coding required.
+        </p>
+
+        <div className="space-y-4 mb-12">
+          {[
+            'Write articles like you would in Google Docs',
+            'One-click publish to your website',
+            'Automatic responsive layouts',
+          ].map((feature) => (
+            <div key={feature} className="flex items-center justify-center space-x-2">
+              <div className="w-5 h-5 text-blue-600">
+                <Zap className="w-full h-full" />
+              </div>
+              <span className="text-gray-700">{feature}</span>
+            </div>
+          ))}
+        </div>
+
+        <Button 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-lg text-lg"
+        >
+          Start Writing
+          <ArrowRight className="ml-2" />
+        </Button>
+
+        <div className="mt-16">
+          <div className="flex justify-center space-x-2 mb-4">
+            <div className="flex -space-x-3">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="w-10 h-10 bg-gray-200 rounded-full border-2 border-white" />
+              ))}
+            </div>
           </div>
-        </form>
-      </div>
+          <p className="text-gray-600">
+            <span className="font-bold">100+</span> writers creating content with our platform
+          </p>
+        </div>
+      </main>
     </div>
   );
 }
