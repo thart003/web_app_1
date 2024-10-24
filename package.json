@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:schema": "ts-node tests/schema-test.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
