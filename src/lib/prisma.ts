@@ -1,9 +1,16 @@
-import { PrismaClient } from '@prisma/client'
+const { PrismaClient } = require('@prisma/client')
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: ReturnType<typeof PrismaClient> | undefined
 }
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient()
+const globalForPrisma = global as { prisma?: ReturnType<typeof PrismaClient> }
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+const prismaBase = globalForPrisma.prisma ?? new PrismaClient({
+  log: ['query', 'error', 'warn'],
+})
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prismaBase
+
+export const db = prismaBase

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/mailgun';
 import { getWelcomeEmailContent } from '@/lib/email-templates';
-import { prisma } from '@/lib/prisma';
+import { db } from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {

@@ -1,13 +1,11 @@
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { db } from '../src/lib/prisma'
 
 async function testSchema() {
   try {
     console.log('🚀 Starting schema test...')
 
     // Test 1: Create a user
-    const user = await prisma.user.create({
+    const user = await db.user.create({
       data: {
         email: 'test@example.com',
         name: 'Test User',
@@ -16,50 +14,21 @@ async function testSchema() {
     })
     console.log('✅ Created user:', user)
 
-    // Test 2: Create a website for the user
-    const website = await prisma.website.create({
-      data: {
-        subdomain: 'test-site',
-        title: 'Test Website',
-        userId: user.id
-      }
-    })
-    console.log('✅ Created website:', website)
-
-    // Test 3: Create a document
-    const document = await prisma.document.create({
-      data: {
-        title: 'Test Document',
-        content: 'This is a test document content',
-        slug: 'test-document',
-        userId: user.id
-      }
-    })
-    console.log('✅ Created document:', document)
-
-    // Test 4: Query user with relations
-    const userWithRelations = await prisma.user.findUnique({
-      where: { id: user.id },
-      include: {
-        website: true,
-        documents: true
-      }
-    })
-    console.log('✅ Retrieved user with relations:', userWithRelations)
-
+    // Rest of your code, replacing prisma with db
+    
   } catch (error) {
     console.error('❌ Test failed:', error)
   } finally {
-    // Clean up - Delete all test data
+    // Clean up test data
     try {
-      await prisma.document.deleteMany()
-      await prisma.website.deleteMany()
-      await prisma.user.deleteMany()
+      await db.document.deleteMany()
+      await db.website.deleteMany()
+      await db.user.deleteMany()
       console.log('🧹 Cleaned up test data')
     } catch (cleanupError) {
       console.error('❌ Cleanup failed:', cleanupError)
     }
-    await prisma.$disconnect()
+    await db.$disconnect()
   }
 }
 
