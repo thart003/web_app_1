@@ -1,7 +1,7 @@
 // app/page.tsx
 'use client';
 
-import { Button } from '@/app/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { ArrowRight, Edit, Globe, Zap } from 'lucide-react';
 
 export default function LandingPage() {

@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+:root {
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #1a202c;
+  --background: #ffffff;
+  --foreground: #1a202c;
+  --primary: #1a202c;
+  --primary-foreground: #f8fafc;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1a202c;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #1a202c;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #1a202c;
+  --foreground: #f8fafc;
+  --border: #2d3748;
+  --input: #2d3748;
+  --ring: #e2e8f0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
