@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import Head from 'next/head';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,35 +16,29 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+function LoadingComponent() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">Loading...</div>
+    </div>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [hasMounted, setHasMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
+    setMounted(true);
   }, []);
-
-  if (!hasMounted) {
-    return (
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          Loading...
-        </body>
-      </html>
-    );
-  }
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {mounted ? children : <LoadingComponent />}
       </body>
     </html>
   );
